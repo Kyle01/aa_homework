@@ -1,18 +1,19 @@
 class Stack
     def initialize
-      # create ivar to store stack here!
+      @array = []
     end
 
     def push(el)
-      # adds an element to the stack
+      @array.push(el)
+      el
     end
 
     def pop
-      # removes one element from the stack
+      @array.pop
     end
 
     def peek
-      # returns, but doesn't remove, the top element in the stack
+      @array[-1]
     end
 end
 
@@ -24,6 +25,7 @@ class Queue
 
   def enqueue(el)
     @array.push(el)
+    el
   end
 
   def dequeue
@@ -36,16 +38,40 @@ class Queue
 end
 
 class Map
+
+  def initialize
+    @array = []
+  end
+
   def set(key, value)
+    pair = @array.index { |pr| pr[0] == key }
+    if pair
+      @array[pair][1] = value
+    else
+      @array.push([key, value])
+    end
+    value
   end
 
   def get(key)
+    @array.each {|el| return el[1] if el [0] == key}
+    nil
   end
 
   def delete(key)
+    value = get(key)
+    @array.reject! { |pair| pair[0] == key }
+    value
   end
 
   def show
+    deep_dup(@array)
+  end
+
+  private
+
+  def deep_dup(arr)
+    arr.map { |el| el.is_a?(Array) ? deep_dup(el) : el }
   end
 end
 
@@ -68,3 +94,12 @@ end
 # p queue.dedequeue
 # p queue.dedequeue
 # p queue.peek
+
+#map = Map.new
+# p map.set("Boy", "Tom")
+# p map.set("Girl", "Sue")
+# p map.set("Boy", "Jeff")
+# p map.set("Girl", "Jen")
+# p map.show
+# p map.delete("Girl")
+# p map.show
