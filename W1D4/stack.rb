@@ -17,13 +17,21 @@ class Stack
 end
 
 class Queue
+
+  def initialize
+    @array = []
+  end
+
   def enqueue(el)
+    @array.push(el)
   end
 
   def dequeue
+    @array.shift
   end
 
   def peek
+    @array[0]
   end
 end
 
@@ -40,3 +48,23 @@ class Map
   def show
   end
 end
+
+# stack = Stack.new
+# p stack.push(1)
+# p stack.push(2)
+# p stack.push(3)
+# p stack.push(4)
+# p stack.peek
+# p stack.pop
+# p stack.pop
+# p stack.peek
+
+# queue = Queue.new
+# p queue.enqueue(1)
+# p queue.enqueue(2)
+# p queue.enqueue(3)
+# p queue.enqueue(4)
+# p queue.peek
+# p queue.dedequeue
+# p queue.dedequeue
+# p queue.peek
